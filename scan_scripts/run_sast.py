@@ -1,4 +1,4 @@
 import os
 
 print("[+] Running Semgrep scan...")
-os.system('semgrep --config=p/ci .')
+os.system('semgrep --config=p/owasp-top-ten .')

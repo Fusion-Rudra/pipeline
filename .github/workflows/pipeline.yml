@@ -6,7 +6,7 @@ on:
 
 jobs:
   pentest:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Code
@@ -20,6 +20,16 @@ jobs:
     - name: Install Dependencies
       run: |
         pip install -r requirements.txt
+
+    - name: Install Gitleaks
+      run: |
+        wget https://github.com/gitleaks/gitleaks/releases/download/v8.18.3/gitleaks_8.18.3_linux_x64.tar.gz
+        tar -xvf gitleaks_8.18.3_linux_x64.tar.gz
+        sudo mv gitleaks /usr/local/bin
+
+    - name: Run Secrets Scan
+      run: |
+        gitleaks detect --source=./your-app-code --report-format json --report-path=gitleaks_report.json
 
     - name: Run SAST Scan
       run: |

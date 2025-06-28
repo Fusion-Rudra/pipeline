@@ -29,7 +29,7 @@ jobs:
 
     - name: Run Secrets Scan
       run: |
-        gitleaks detect --source=./your-app-code --report-format json --report-path=gitleaks_report.json
+        gitleaks detect --source=./pygoat --report-format json --report-path=gitleaks_report.json
 
     - name: Run SAST Scan
       run: |

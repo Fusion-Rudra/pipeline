@@ -1,0 +1,34 @@
+name: CI + AI Pentest Pipeline Phase-1
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  pentest:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install Dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run SAST Scan
+      run: |
+        python scan_scripts/run_sast.py
+
+    - name: Run Secrets Scan
+      run: |
+        python scan_scripts/run_secret_scan.py
+
+    - name: Run AI Attack Surface Discovery
+      run: |
+        python scan_scripts/ai_attack_surface.py
